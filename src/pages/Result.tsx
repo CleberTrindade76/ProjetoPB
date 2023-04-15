@@ -51,81 +51,13 @@ const Card = styled.div`
   width: 100%;
 `;
 
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 12px;
-
-  label {
-    margin-bottom: 4px;
-  }
-
-  input,
-  select {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
-    font-size: 16px;
-    outline: none;
-
-    &:focus {
-      border-color: #7159c1;
-    }
-  }
-`;
-
-
-const Button = styled.button`
-  height: 40px;
-  background-color: #0066cc;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  
-  &:hover {
-    background-color: #0059b3;
-  }
-`;
-
 const Result: React.FC = () => {
   return (
     <Container>
       <BackgroundImage />
       <Content>
         <Card>
-          <InputWrapper>
-            <label>Qual o seu nome?</label>
-            <input type="text" />
-          </InputWrapper>
-          <InputWrapper>
-            <label>Qual o seu telefone?</label>
-            <input type="text" />
-          </InputWrapper>
-          <InputWrapper>
-            <label>Qual o seu saldo?</label>
-            <input type="text" />
-          </InputWrapper>
-          <InputWrapper>
-            <label>Qual o mês do seu aniversário?</label>
-            <select>
-              <option>Janeiro</option>
-              <option>Fevereiro</option>
-              <option>Março</option>
-              <option>Abril</option>
-              <option>Maio</option>
-              <option>Junho</option>
-              <option>Julho</option>
-              <option>Agosto</option>
-              <option>Setembro</option>
-              <option>Outubro</option>
-              <option>Novembro</option>
-              <option>Dezembro</option>
-            </select>
-          </InputWrapper>
-          <Button>Ver proposta</Button>
+         
         </Card>
       </Content>
     </Container>

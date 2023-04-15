@@ -3,6 +3,7 @@
   background-image: url(../../public/images/hero.jpg);
   background-size: cover;
   background-position: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {
