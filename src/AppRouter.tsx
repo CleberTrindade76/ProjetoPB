@@ -8,7 +8,7 @@ const AppRouter: React.FC = () => {
     <BrowserRouter>
       <Routes>
       <Route path="/" element={<Home />} />
-        <Route path="/about" element={<Result />} />
+        <Route path="/myFGTS" element={<Result />} />
       </Routes>
     </BrowserRouter>
   );
