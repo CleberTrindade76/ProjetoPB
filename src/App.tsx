@@ -1,13 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './styles/App.css';
 import AppRouter from './AppRouter';
+import { MyProvider } from "./context/context";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <AppRouter />
-    </div>
+    <MyProvider>
+      <div className="App">
+        <AppRouter />
+      </div>
+    </MyProvider>
   );
 }
 

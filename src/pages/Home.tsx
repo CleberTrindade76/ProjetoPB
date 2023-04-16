@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
-
+import { MyContext } from "../context/context";
 
 const Container = styled.div`
   width: 100%;
@@ -99,6 +99,24 @@ const StyledText = styled.div`
 
 const Home: React.FC = () => {
 
+  const { name, setName, phone, setPhone, balance, setBalance, birthday, setBirthday } = useContext(MyContext);
+
+  const handleInputChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleInputChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPhone(event.target.value);
+  };
+
+  const handleInputChangeBalance = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBalance(event.target.value);
+  };
+
+  const handleInputChangeBirthday = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setBirthday(event.target.value);
+  };
+
   const meses = [
     { value: '01', label: 'Janeiro' },
     { value: '02', label: 'Fevereiro' },
@@ -127,12 +145,12 @@ const Home: React.FC = () => {
       </StyledText>
         <Card>
           <Row>
-            <Input label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
-            <Input label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
+            <Input value={name} onChange={handleInputChangeName} label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
+            <Input value={phone} onChange={handleInputChangePhone} label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
           </Row>
           <Row>
-            <Input label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
-            <Select label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
+            <Input value={balance} onChange={handleInputChangeBalance} label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
+            <Select value={birthday} onChange={handleInputChangeBirthday} label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
           </Row>
           <Button label="Ver proposta" />
         </Card>

@@ -3,6 +3,8 @@ import styled from "styled-components";
 interface InputProps {
   label?: string;
   placeholder?: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputContainer = styled.div`
@@ -30,11 +32,11 @@ const InputElement = styled.input`
   }
 `;
 
-const Input: React.FC<InputProps & React.InputHTMLAttributes<HTMLInputElement>> = ({ label, placeholder, ...props }) => {
+const Input: React.FC<InputProps & React.InputHTMLAttributes<HTMLInputElement>> = ({ label, placeholder, value, onChange, ...props }) => {
   return (
     <InputContainer>
       {label && <Label>{label}</Label>}
-      <InputElement placeholder={placeholder} {...props} />
+      <InputElement placeholder={placeholder} value={value} onChange={onChange} {...props} />
     </InputContainer>
   );
 };

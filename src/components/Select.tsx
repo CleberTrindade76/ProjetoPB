@@ -4,6 +4,8 @@ interface SelectProps {
   label?: string;
   placeholder?: string;
   options: { value: string; label: string; }[];
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const SelectContainer = styled.div`
@@ -33,11 +35,11 @@ const SelectElement = styled.select`
 
 const OptionElement = styled.option``;
 
-const Select: React.FC<SelectProps & React.SelectHTMLAttributes<HTMLSelectElement>> = ({ label, placeholder, options, ...props }) => {
+const Select: React.FC<SelectProps & React.SelectHTMLAttributes<HTMLSelectElement>> = ({ label, placeholder, options, value, onChange, ...props }) => {
   return (
     <SelectContainer>
       {label && <Label>{label}</Label>}
-      <SelectElement {...props}>
+      <SelectElement value={value} onChange={onChange} {...props}>
         {placeholder && <OptionElement value="" disabled selected hidden>{placeholder}</OptionElement>}
         {options.map(option => (
           <OptionElement value={option.value}>{option.label}</OptionElement>
