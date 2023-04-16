@@ -106,11 +106,21 @@ const Home: React.FC = () => {
   };
 
   const handleInputChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(event.target.value);
+    const digits = event.target.value.replace(/\D/g, '');
+    const cell = digits.length === 11;
+    const formattedValue = cell
+      ? digits.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+      : digits.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    if(digits.length < 12){
+      setPhone(formattedValue);
+    }
   };
 
   const handleInputChangeBalance = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBalance(event.target.value);
+    const digits = event.target.value.replace(/\D/g, '');
+    const number = Number(digits) / 100;
+    const formattedValue = number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    setBalance(formattedValue);
   };
 
   const handleInputChangeBirthday = (event: React.ChangeEvent<HTMLSelectElement>) => {
