@@ -11,7 +11,8 @@ const ButtonElement = styled.button`
   font-family: Montserrat, sans-serif;
   font-size: 16px;
   font-weight: bold;
-  padding: 8px 16px;
+  padding: 16px;
+  margin-top: 32px;
   border-radius: 4px;
   border: none;
   cursor: pointer;

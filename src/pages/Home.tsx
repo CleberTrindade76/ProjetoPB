@@ -40,19 +40,61 @@ const BackgroundImage = styled.div`
 
 const Content = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-`;
+  width: 100%;
+  `;
 
 const Card = styled.div`
   background-color: #fff;
-  padding: 24px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 400px;
+  padding: 60px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   width: 100%;
+  max-width: 700px;
+  margin-top: 30px;
+  `;
+
+const Row = styled.div`
+  display: flex;
+  place-content: space-between;
+  margin-top: 16px;
+  `;
+
+const StyledText = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+  & > h1 {
+    font-size: 40px;
+    font-style: italic;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 20px;
+    text-align: center;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  & > div > p {
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+  }
+
+  & > div > p.bold {
+    font-weight: bold;
+  }
 `;
 
 const Home: React.FC = () => {
@@ -76,11 +118,22 @@ const Home: React.FC = () => {
     <Container>
       <BackgroundImage />
       <Content>
+      <StyledText>
+        <h1>Use uma grana que já é sua e saia do aperto.</h1>
+        <div>
+          <p>SAQUE ANIVERSÁRIO</p>
+          <p className="bold">Insira seus dados e verifique o quanto você poderá receber!</p>
+        </div>
+      </StyledText>
         <Card>
-          <Input label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
-          <Input label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
-          <Input label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
-          <Select label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
+          <Row>
+            <Input label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
+            <Input label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
+          </Row>
+          <Row>
+            <Input label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
+            <Select label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
+          </Row>
           <Button label="Ver proposta" />
         </Card>
       </Content>

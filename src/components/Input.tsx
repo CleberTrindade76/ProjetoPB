@@ -9,6 +9,8 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  width: -webkit-fill-available;
+  padding: 0px 12px;
 `;
 
 const Label = styled.label`
