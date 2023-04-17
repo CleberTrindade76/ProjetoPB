@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { calcularSaqueFGTS } from '../utils/utils';
 import { MyContext } from "../context/context";
 import StyledTitle from '../components/StyledTitle';
@@ -119,10 +120,18 @@ const Content = styled.div`
 `;
 
 const Result: React.FC = () => {
+
+  const navigate = useNavigate()
+
   const { name, balance, birthday } = useContext(MyContext);
+
   const saqueAniversario = calcularSaqueFGTS(balance)
 
-  console.log("AAAAAUUU --> ", saqueAniversario, balance )
+  useEffect(() => {
+    if(name.length < 1 || balance.length < 1){
+      navigate("/")
+    }
+  }, [balance.length, name.length, navigate]); 
 
   return (
     <Container>

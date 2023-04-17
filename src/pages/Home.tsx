@@ -95,6 +95,7 @@ const Row = styled.div`
 `;
 
 const Home: React.FC = () => {
+  const navigate = useNavigate()
 
   const { name, setName, phone, setPhone, balance, setBalance, birthday, setBirthday } = useContext(MyContext);
 
@@ -102,8 +103,6 @@ const Home: React.FC = () => {
   const [errorPhone, setErrorPhone] = useState('');
   const [errorBalance, setErrorBalance] = useState('');
   const [errorBirthday, setErrorBirthday] = useState('');
-
-  const navigate = useNavigate()
 
   const handleInputChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
