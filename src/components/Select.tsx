@@ -19,14 +19,17 @@ const SelectContainer = styled.div`
 const Label = styled.label`
   font-weight: bold;
   margin-bottom: 8px;
+  text-align: initial;
+  color: darkslategray;
 `;
 
 const SelectElement = styled.select`
-  padding: 8px;
+  height: 49px;
+  color: darkslategray;
+  padding: 10px 15px;
   border-radius: 4px;
-  border: none;
+  border: solid 2px lightgray;
   outline: none;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   font-size: 16px;
   &::placeholder {
     color: rgba(0, 0, 0, 0.5);

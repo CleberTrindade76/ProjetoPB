@@ -1,14 +1,20 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
+import StyledTitle from '../components/StyledTitle';
 import { MyContext } from "../context/context";
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const BackgroundImage = styled.div`
@@ -24,6 +30,12 @@ const BackgroundImage = styled.div`
   transform: skewX(-70deg);
   transform-origin: top left;
   z-index: -1;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100vh;
+    transform: none;
+  }
 
   &::after {
     content: '';
@@ -45,55 +57,39 @@ const Content = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  `;
+`;
 
 const Card = styled.div`
   background-color: #fff;
-  padding: 60px;
-  border-radius: 5px;
+  padding: 40px 80px;
+  border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 700px;
+  max-width: 600px;
   margin-top: 30px;
-  `;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+  }
+`;
 
 const Row = styled.div`
   display: flex;
-  place-content: space-between;
-  margin-top: 16px;
-  `;
+  flex-direction: column;
 
-const StyledText = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-
-  & > h1 {
-    font-size: 40px;
-    font-style: italic;
-    font-weight: bold;
-    color: #fff;
-    margin-right: 20px;
-    text-align: center;
-  }
-
-  & > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  & > div > p {
-    font-size: 16px;
-    color: #fff;
-    margin: 0;
-  }
-
-  & > div > p.bold {
-    font-weight: bold;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    place-content: space-between;
+    margin-top: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 `;
 
@@ -101,8 +97,14 @@ const Home: React.FC = () => {
 
   const { name, setName, phone, setPhone, balance, setBalance, birthday, setBirthday } = useContext(MyContext);
 
+  const navigate = useNavigate()
+
   const handleInputChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
+  };
+
+  const handleInputChangeBirthday = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setBirthday(event.target.value);
   };
 
   const handleInputChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,9 +125,9 @@ const Home: React.FC = () => {
     setBalance(formattedValue);
   };
 
-  const handleInputChangeBirthday = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthday(event.target.value);
-  };
+  const sendForm = () => {
+    navigate("/myFGTS")
+  }
 
   const meses = [
     { value: '01', label: 'Janeiro' },
@@ -146,13 +148,7 @@ const Home: React.FC = () => {
     <Container>
       <BackgroundImage />
       <Content>
-      <StyledText>
-        <h1>Use uma grana que já é sua e saia do aperto.</h1>
-        <div>
-          <p>SAQUE ANIVERSÁRIO</p>
-          <p className="bold">Insira seus dados e verifique o quanto você poderá receber!</p>
-        </div>
-      </StyledText>
+        <StyledTitle/>
         <Card>
           <Row>
             <Input value={name} onChange={handleInputChangeName} label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
@@ -162,7 +158,7 @@ const Home: React.FC = () => {
             <Input value={balance} onChange={handleInputChangeBalance} label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
             <Select value={birthday} onChange={handleInputChangeBirthday} label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
           </Row>
-          <Button label="Ver proposta" />
+          <Button label="Ver Proposta" onClick={sendForm} />
         </Card>
       </Content>
     </Container>

@@ -6,12 +6,12 @@ interface ButtonProps {
 }
 
 const ButtonElement = styled.button`
-  background-color: #ff9500;
+  background-color: #f5c72f;
   color: #fff;
-  font-family: Montserrat, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: bold;
-  padding: 16px;
+  padding: 16px 40px;
   margin-top: 32px;
   border-radius: 4px;
   border: none;

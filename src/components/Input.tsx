@@ -18,14 +18,17 @@ const InputContainer = styled.div`
 const Label = styled.label`
   font-weight: bold;
   margin-bottom: 8px;
+  text-align: initial;
+  color: darkslategray;
 `;
 
 const InputElement = styled.input`
-  padding: 8px;
+  height: 25px;
+  padding: 10px 15px;
+  color: darkslategray;
   border-radius: 4px;
-  border: none;
+  border: solid 2px lightgray;
   outline: none;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   font-size: 16px;
   &::placeholder {
     color: rgba(0, 0, 0, 0.5);
