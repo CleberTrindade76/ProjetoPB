@@ -1,61 +1,28 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { calculateBirthdayWithdrawal } from '../utils/utils';
+import { calcularSaqueFGTS } from '../utils/utils';
 import { MyContext } from "../context/context";
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: relative;
-`;
-
-const BackgroundImage = styled.div`
-  background-image:  url('../../public/images/hero.jpg') no-repeat center center fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.5;
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: skewX(-70deg);
-  transform-origin: top left;
-  z-index: -1;
-
-  &::after {
-    content: '';
-    background-image: radial-gradient(circle, #2c2c54 10%, transparent 0);
-    background-size: 20px 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
-  }
-`;
-
-const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
+import StyledTitle from '../components/StyledTitle';
 
 const Card = styled.div`
   background-color: #fff;
-  padding: 80px 60px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 700px;
+  padding: 40px 80px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
+  max-width: 600px;
+  margin-top: 30px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+  }
 `;
 
 const ResultContainer = styled.div`
@@ -99,14 +66,69 @@ const DisclaimerText = styled.p`
   text-align: initial;
 `;
 
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: relative;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
+`;
+
+const BackgroundImage = styled.div`
+  background-image:  url('../../public/images/hero.jpg') no-repeat center center fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: skewX(-70deg);
+  transform-origin: top left;
+  z-index: -1;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100vh;
+    transform: none;
+  }
+
+  &::after {
+    content: '';
+    background-image: radial-gradient(circle, #2c2c54 10%, transparent 0);
+    background-size: 20px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+  }
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+`;
+
 const Result: React.FC = () => {
   const { name, balance, birthday } = useContext(MyContext);
-  const saqueAniversario = calculateBirthdayWithdrawal(balance, birthday)
+  const saqueAniversario = calcularSaqueFGTS(balance)
+
+  console.log("AAAAAUUU --> ", saqueAniversario, balance )
 
   return (
     <Container>
       <BackgroundImage />
       <Content>
+        <StyledTitle/>
         <ResultContainer>
           <Card>
             <LeftSide>

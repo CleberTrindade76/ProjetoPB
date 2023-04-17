@@ -1,50 +1,60 @@
-type SaqueAniversarioResult = {
-  valor: number;
-}
+import axios from 'axios';
 
-export function calculateBirthdayWithdrawal(saldo: string, mesAniversario: string): SaqueAniversarioResult {
-  const mesAtual = new Date().getMonth();
-  const mesLimite = (parseInt(mesAniversario) % 12) + 1; // o mês limite é o próximo mês ao mês de aniversário
-  const alq: number = calculatePercentage(mesAtual, mesLimite);
-  const parcela: number = calculateFixedAmount(parseFloat(saldo), alq);
-  const valor: number = alq * parseFloat(saldo) + parcela;
+export function calcularSaqueFGTS(saldo: string): string {
+  const saldoSemR: string = saldo.replace("R$ ", ""); // Remove o "R$ " do início da string
+  const saldoSemPontos: string = saldoSemR.replace(".", ""); // Remove os pontos que separam as milhares
+  const saldoFloat: number = parseFloat(saldoSemPontos.replace(",", ".")); // Transforma o saldo em string para float
+  const aliquotas: number[] = [0.5, 0.4, 0.3, 0.2, 0.15, 0.1, 0.05]; // Alíquotas de cada faixa
+  const parcelasAdicionais: number[] = [0, 50, 150, 650, 1150, 1900, 2900]; // Parcelas adicionais de cada faixa
+  const limites: number[] = [500, 1000, 5000, 10000, 15000, 20000]; // Limites de cada faixa
+  let valorSaque: number = 0;
 
-  return { valor };
-}
-
-function calculatePercentage(mesAtual: number, mesLimite: number): number {
-  if (mesAtual === mesLimite) {
-    return 0.5; // limite do primeiro caso
-  } else if (mesAtual > mesLimite && mesAtual <= mesLimite + 6) {
-    return 0.4; // segundo caso
-  } else if (mesAtual > mesLimite + 6 && mesAtual <= mesLimite + 12) {
-    return 0.3; // terceiro caso
-  } else if (mesAtual > mesLimite + 12 && mesAtual <= mesLimite + 18) {
-    return 0.2; // quarto caso
-  } else if (mesAtual > mesLimite + 18 && mesAtual <= mesLimite + 24) {
-    return 0.15; // quinto caso
-  } else if (mesAtual > mesLimite + 24 && mesAtual <= mesLimite + 36) {
-    return 0.1; // sexto caso
-  } else {
-    return 0.05; // limite do último caso
+  for (let i = 0; i < limites.length; i++) {
+    if (saldoFloat <= limites[i]) {
+      valorSaque = saldoFloat * aliquotas[i] + parcelasAdicionais[i];
+      break; // Sai do loop assim que encontrar a faixa correta
+    } else if (i === limites.length - 1) {
+      valorSaque = saldoFloat * aliquotas[i] + parcelasAdicionais[i];
+    }
   }
-}
 
-function calculateFixedAmount(saldo: number, alq: number): number {
-  if (saldo <= 500) {
-    return saldo * 0.5;
-  } else if (saldo <= 1000) {
-    return 50 + saldo * 0.4;
-  } else if (saldo <= 5000) {
-    return 150 + saldo * 0.3;
-  } else if (saldo <= 10000) {
-    return 650 + saldo * 0.2;
-  } else if (saldo <= 15000) {
-    return 1150 + saldo * 0.15;
-  } else if (saldo <= 20000) {
-    return 1900 + saldo * 0.1;
-  } else {
-    return 2900 + saldo * 0.05;
-  }
+  return valorSaque.toFixed(2); // Retorna o valor do saque com 2 casas decimais
 }
  
+export async function validatePhoneNumber(phoneNumber: string): Promise<boolean> {
+  const apiKey = "ec1b7ccf91154cb7a286ed73d4b29eae"
+  const url = `https://phonevalidation.abstractapi.com/v1/?api_key=${apiKey}&phone=${phoneNumber}`;
+
+  try {
+    const response = await axios.get(url);
+    const isValid = response.data.valid;
+    return isValid;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export async function validateForm(name: string, phone: string, balance: string, birthday: string): Promise<{ valid: boolean, error?: number }> {
+  const onlyPhoneNumbers = phone.replace(/[^a-zA-Z0-9]/g, '')
+  const isPhoneNumberValidPromise = validatePhoneNumber(onlyPhoneNumbers);
+  const isPhoneNumberValid = await isPhoneNumberValidPromise;
+
+  console.log("AAAAAAAAAA --> ",validatePhoneNumber(onlyPhoneNumbers) )
+
+
+  const values = [name, onlyPhoneNumbers, balance, birthday];
+
+  for (let i = 0; i < values.length; i++) {
+    if (values[i].length < 1) {
+      return { valid: false, error: i }; 
+    }
+  }
+  
+  if (!isPhoneNumberValid) {
+    return { valid: false, error: 1 }; 
+  }
+
+  
+  return { valid: true };
+}

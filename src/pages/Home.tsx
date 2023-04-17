@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Input from '../components/Input';
@@ -6,6 +6,7 @@ import Select from '../components/Select';
 import Button from '../components/Button';
 import StyledTitle from '../components/StyledTitle';
 import { MyContext } from "../context/context";
+import { validateForm } from '../utils/utils';
 
 const Container = styled.div`
   width: 100%;
@@ -97,6 +98,11 @@ const Home: React.FC = () => {
 
   const { name, setName, phone, setPhone, balance, setBalance, birthday, setBirthday } = useContext(MyContext);
 
+  const [errorName, setErrorName] = useState('');
+  const [errorPhone, setErrorPhone] = useState('');
+  const [errorBalance, setErrorBalance] = useState('');
+  const [errorBirthday, setErrorBirthday] = useState('');
+
   const navigate = useNavigate()
 
   const handleInputChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,20 +131,46 @@ const Home: React.FC = () => {
     setBalance(formattedValue);
   };
 
-  const sendForm = () => {
-    navigate("/myFGTS")
+  const sendForm = async () => {
+    const validObj = validateForm(name, phone, balance, birthday)
+    if((await validObj).valid){
+      navigate("/myFGTS")
+    }else{
+      switch((await validObj).error) {
+        case 0:
+          setErrorName("Insira seu nome.")
+          break;
+        case 1:
+          setErrorName("")
+          setErrorPhone("Telefone inválido")
+          break;
+        case 2:
+          setErrorName("")
+          setErrorPhone("")
+          setErrorBalance("Valor inválido")
+          break;
+        case 3:
+          setErrorName("")
+          setErrorPhone("")
+          setErrorBalance("")
+          setErrorBirthday("Mês inválido")
+          break;
+        default:
+          alert('Erro desconhecido.');
+      }
+    }
   }
 
   const meses = [
-    { value: '01', label: 'Janeiro' },
-    { value: '02', label: 'Fevereiro' },
-    { value: '03', label: 'Março' },
-    { value: '04', label: 'Abril' },
-    { value: '05', label: 'Maio' },
-    { value: '06', label: 'Junho' },
-    { value: '07', label: 'Julho' },
-    { value: '08', label: 'Agosto' },
-    { value: '09', label: 'Setembro' },
+    { value: '1', label: 'Janeiro' },
+    { value: '2', label: 'Fevereiro' },
+    { value: '3', label: 'Março' },
+    { value: '4', label: 'Abril' },
+    { value: '5', label: 'Maio' },
+    { value: '6', label: 'Junho' },
+    { value: '7', label: 'Julho' },
+    { value: '8', label: 'Agosto' },
+    { value: '9', label: 'Setembro' },
     { value: '10', label: 'Outubro' },
     { value: '11', label: 'Novembro' },
     { value: '12', label: 'Dezembro' }
@@ -151,12 +183,12 @@ const Home: React.FC = () => {
         <StyledTitle/>
         <Card>
           <Row>
-            <Input value={name} onChange={handleInputChangeName} label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
-            <Input value={phone} onChange={handleInputChangePhone} label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
+            <Input error={errorName} value={name} onChange={handleInputChangeName} label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
+            <Input error={errorPhone} value={phone} onChange={handleInputChangePhone} label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
           </Row>
           <Row>
-            <Input value={balance} onChange={handleInputChangeBalance} label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
-            <Select value={birthday} onChange={handleInputChangeBirthday} label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
+            <Input error={errorBalance} value={balance} onChange={handleInputChangeBalance} label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
+            <Select error={errorBirthday} value={birthday} onChange={handleInputChangeBirthday} label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
           </Row>
           <Button label="Ver Proposta" onClick={sendForm} />
         </Card>

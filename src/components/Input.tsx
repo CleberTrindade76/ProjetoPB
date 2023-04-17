@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import SnackBarError from './SnackBar';
 
 interface InputProps {
   label?: string;
   placeholder?: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string
 }
 
 const InputContainer = styled.div`
@@ -35,11 +37,12 @@ const InputElement = styled.input`
   }
 `;
 
-const Input: React.FC<InputProps & React.InputHTMLAttributes<HTMLInputElement>> = ({ label, placeholder, value, onChange, ...props }) => {
+const Input: React.FC<InputProps & React.InputHTMLAttributes<HTMLInputElement>> = ({ label, placeholder, value, onChange, error, ...props }) => {
   return (
     <InputContainer>
       {label && <Label>{label}</Label>}
       <InputElement placeholder={placeholder} value={value} onChange={onChange} {...props} />
+      {(error && error.length > 1) && <SnackBarError message={error}/>}
     </InputContainer>
   );
 };

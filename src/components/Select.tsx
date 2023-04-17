@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import SnackBarError from './SnackBar';
 
 interface SelectProps {
   label?: string;
@@ -6,6 +7,7 @@ interface SelectProps {
   options: { value: string; label: string; }[];
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  error?: string
 }
 
 const SelectContainer = styled.div`
@@ -38,7 +40,7 @@ const SelectElement = styled.select`
 
 const OptionElement = styled.option``;
 
-const Select: React.FC<SelectProps & React.SelectHTMLAttributes<HTMLSelectElement>> = ({ label, placeholder, options, value, onChange, ...props }) => {
+const Select: React.FC<SelectProps & React.SelectHTMLAttributes<HTMLSelectElement>> = ({ label, placeholder, options, value, error, onChange, ...props }) => {
   return (
     <SelectContainer>
       {label && <Label>{label}</Label>}
@@ -48,6 +50,7 @@ const Select: React.FC<SelectProps & React.SelectHTMLAttributes<HTMLSelectElemen
           <OptionElement value={option.value}>{option.label}</OptionElement>
         ))}
       </SelectElement>
+      {(error && error.length > 1) && <SnackBarError message={error}/>}
     </SelectContainer>
   );
 };
