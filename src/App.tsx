@@ -6,7 +6,7 @@ import { MyProvider } from "./context/context";
 const App: React.FC = () => {
   return (
     <MyProvider>
-      <div className="App">
+      <div className="App" id="app-component">
         <AppRouter />
       </div>
     </MyProvider>

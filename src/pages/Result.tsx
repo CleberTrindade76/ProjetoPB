@@ -7,6 +7,7 @@ import StyledTitle from '../components/StyledTitle';
 import Card from '../components/Card';
 import Container from '../components/Container';
 import Content from '../components/Content';
+import BackgroundImage from '../components/BackgroundImage';
 
 const ResultContainer = styled.div`
   display: flex;
@@ -85,6 +86,12 @@ const DisclaimerText = styled.p`
   }
 `;
 
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+`;
+
 const Result: React.FC = () => {
 
   const navigate = useNavigate()
@@ -104,24 +111,27 @@ const Result: React.FC = () => {
   }, [balance.length, name.length, navigate]); 
 
   return (
-    <Container>
-      <Content>
-        <StyledTitle userName={names[0]}/>
-        <ResultContainer>
-          <Card>
-            <CardContent>
-              <LeftSide>
-                <Title>Você pode receber até</Title>
-                <ResultText><span>R$ </span>{`${saqueAniversario[0]}`}<span className='cents'>,{`${saqueAniversario[1]}`}</span></ResultText>
-              </LeftSide>
-              <RightSide>
-                <DisclaimerText><b>Esta simulação traz valores aproximados.</b><span> Para calcular o valor exato,</span><b> entre em contato com o Smile .Co ou consulte seu saldo no app do FGTS.</b></DisclaimerText>
-              </RightSide>
-            </CardContent>
-          </Card>
-        </ResultContainer>
-      </Content>
-    </Container>
+    <Wrapper>
+      <BackgroundImage />
+      <Container>
+        <Content>
+          <StyledTitle userName={names[0]}/>
+          <ResultContainer>
+            <Card>
+              <CardContent>
+                <LeftSide>
+                  <Title>Você pode receber até</Title>
+                  <ResultText><span>R$ </span>{`${saqueAniversario[0]}`}<span className='cents'>,{`${saqueAniversario[1]}`}</span></ResultText>
+                </LeftSide>
+                <RightSide>
+                  <DisclaimerText><b>Esta simulação traz valores aproximados.</b><span> Para calcular o valor exato,</span><b> entre em contato com o Smile .Co ou consulte seu saldo no app do FGTS.</b></DisclaimerText>
+                </RightSide>
+              </CardContent>
+            </Card>
+          </ResultContainer>
+        </Content>
+      </Container>
+    </Wrapper>
   );
 };
 

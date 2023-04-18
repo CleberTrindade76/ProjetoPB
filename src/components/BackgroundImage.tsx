@@ -26,6 +26,10 @@ const DottedBlueDiv = styled.div`
   right: 0px;
   background-image: radial-gradient(circle, #293447 1px, transparent 1px);
   background-size: 10px 10px;
+  @media (max-width: 768px) {
+    width: 100%;
+    clip-path: none;
+  }
 `;
 
 const Wrapper = styled.div`

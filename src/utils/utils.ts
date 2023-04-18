@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export function calcularSaqueFGTS(saldo: string): string[] {
   const saldoSemR: string = saldo.replace("R$ ", ""); // Remove o "R$ " do início da string
   const saldoSemPontos: string = saldoSemR.replace(".", ""); // Remove os pontos que separam as milhares
@@ -24,24 +22,37 @@ export function calcularSaqueFGTS(saldo: string): string[] {
   return [valorInteiro, valorCentavos]; // Retorna um array com a parte inteira e a parte decimal do valor
 }
  
-export async function validatePhoneNumber(phoneNumber: string): Promise<boolean> {
+export async function validatePhoneNumberApi(phoneNumber: string): Promise<boolean> {
   const apiKey = "ec1b7ccf91154cb7a286ed73d4b29eae"
   const url = `https://phonevalidation.abstractapi.com/v1/?api_key=${apiKey}&phone=${phoneNumber}`;
 
   try {
-    const response = await axios.get(url);
-    const isValid = response.data.valid;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching phone validation data. Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const isValid = data.valid;
+
     return isValid;
   } catch (error) {
-    console.error(error);
     return false;
   }
 }
 
 export async function validateForm(name: string, phone: string, balance: string, birthday: string): Promise<{ valid: boolean, error?: number }> {
+
+  const validatePhoneNumber = (phone: string): boolean => {
+    const regex = /^([14689][0-9]|2[12478]|3([1-5]|[7-8])|5([13-5])|7[193-7])9[0-9]{8}$/;
+    return regex.test(phone);
+  }
+
   const onlyPhoneNumbers = phone.replace(/[^a-zA-Z0-9]/g, '')
-  const isPhoneNumberValidPromise = validatePhoneNumber(onlyPhoneNumbers);
-  const isPhoneNumberValid = await isPhoneNumberValidPromise;
+  const isPhoneNumberValid = validatePhoneNumber(onlyPhoneNumbers);
+  const isPhoneNumberValidPromise = validatePhoneNumberApi(onlyPhoneNumbers);
+  const isPhoneNumberValidFromApi = await isPhoneNumberValidPromise;
 
   const values = [name, onlyPhoneNumbers, balance, birthday];
 
@@ -50,11 +61,10 @@ export async function validateForm(name: string, phone: string, balance: string,
       return { valid: false, error: i }; 
     }
   }
-  
-  if (!isPhoneNumberValid) {
+
+  if (!isPhoneNumberValid && !isPhoneNumberValidFromApi) {
     return { valid: false, error: 1 }; 
   }
 
-  
   return { valid: true };
 }
