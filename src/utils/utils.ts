@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function calcularSaqueFGTS(saldo: string): string {
+export function calcularSaqueFGTS(saldo: string): string[] {
   const saldoSemR: string = saldo.replace("R$ ", ""); // Remove o "R$ " do início da string
   const saldoSemPontos: string = saldoSemR.replace(".", ""); // Remove os pontos que separam as milhares
   const saldoFloat: number = parseFloat(saldoSemPontos.replace(",", ".")); // Transforma o saldo em string para float
@@ -18,7 +18,10 @@ export function calcularSaqueFGTS(saldo: string): string {
     }
   }
 
-  return valorSaque.toFixed(2); // Retorna o valor do saque com 2 casas decimais
+  const valorInteiro: string = Math.floor(valorSaque).toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  const valorCentavos: string = (valorSaque % 1).toFixed(2).replace("0.", "");
+
+  return [valorInteiro, valorCentavos]; // Retorna um array com a parte inteira e a parte decimal do valor
 }
  
 export async function validatePhoneNumber(phoneNumber: string): Promise<boolean> {
@@ -39,9 +42,6 @@ export async function validateForm(name: string, phone: string, balance: string,
   const onlyPhoneNumbers = phone.replace(/[^a-zA-Z0-9]/g, '')
   const isPhoneNumberValidPromise = validatePhoneNumber(onlyPhoneNumbers);
   const isPhoneNumberValid = await isPhoneNumberValidPromise;
-
-  console.log("AAAAAAAAAA --> ",validatePhoneNumber(onlyPhoneNumbers) )
-
 
   const values = [name, onlyPhoneNumbers, balance, birthday];
 

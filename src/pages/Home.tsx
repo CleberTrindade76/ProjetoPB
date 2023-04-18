@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Input from '../components/Input';
 import Select from '../components/Select';
 import Button from '../components/Button';
+import BackgroundImage from '../components/BackgroundImage';
 import StyledTitle from '../components/StyledTitle';
 import { MyContext } from "../context/context";
 import { validateForm } from '../utils/utils';
@@ -15,39 +16,6 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     height: auto;
-  }
-`;
-
-const BackgroundImage = styled.div`
-  background-image:  url('../../public/images/hero.jpg') no-repeat center center fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 1;
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: skewX(-70deg);
-  transform-origin: top left;
-  z-index: -1;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 100vh;
-    transform: none;
-  }
-
-  &::after {
-    content: '';
-    background-image: radial-gradient(circle, #2c2c54 10%, transparent 0);
-    background-size: 20px 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
   }
 `;
 
@@ -92,6 +60,12 @@ const Row = styled.div`
     margin-left: 10px;
     margin-right: 10px;
   }
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
 `;
 
 const Home: React.FC = () => {
@@ -176,23 +150,25 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <BackgroundImage />
-      <Content>
-        <StyledTitle/>
-        <Card>
-          <Row>
-            <Input error={errorName} value={name} onChange={handleInputChangeName} label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
-            <Input error={errorPhone} value={phone} onChange={handleInputChangePhone} label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
-          </Row>
-          <Row>
-            <Input error={errorBalance} value={balance} onChange={handleInputChangeBalance} label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
-            <Select error={errorBirthday} value={birthday} onChange={handleInputChangeBirthday} label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
-          </Row>
-          <Button label="Ver Proposta" onClick={sendForm} />
-        </Card>
-      </Content>
-    </Container>
+    <Wrapper>
+      <BackgroundImage imageUrl='../../public/images/hero.jpg' />
+      <Container>
+        <Content>
+          <StyledTitle/>
+          <Card>
+            <Row>
+              <Input error={errorName} value={name} onChange={handleInputChangeName} label="Qual seu nome?" type="text" placeholder="ex.: Guilherme Neves"/>
+              <Input error={errorPhone} value={phone} onChange={handleInputChangePhone} label="Qual seu telefone?" type="text" placeholder="ex.: (21) 98765-9087"/>
+            </Row>
+            <Row>
+              <Input error={errorBalance} value={balance} onChange={handleInputChangeBalance} label="Qual seu saldo?" type="text" placeholder="ex.: R$ 5.000,00"/>
+              <Select error={errorBirthday} value={birthday} onChange={handleInputChangeBirthday} label="Qual é o seu mês de aniversário?" placeholder="Selecione..." options={meses} />
+            </Row>
+            <Button label="Ver Proposta" onClick={sendForm} />
+          </Card>
+        </Content>
+      </Container>
+    </Wrapper>
   );
 };
 

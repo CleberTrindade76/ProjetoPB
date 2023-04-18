@@ -47,7 +47,7 @@ const Select: React.FC<SelectProps & React.SelectHTMLAttributes<HTMLSelectElemen
       <SelectElement value={value} onChange={onChange} {...props}>
         {placeholder && <OptionElement value="" disabled selected hidden>{placeholder}</OptionElement>}
         {options.map(option => (
-          <OptionElement value={option.value}>{option.label}</OptionElement>
+          <OptionElement key={option.value} value={option.value}>{option.label}</OptionElement>
         ))}
       </SelectElement>
       {(error && error.length > 1) && <SnackBarError message={error}/>}

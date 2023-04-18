@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FiDollarSign  } from 'react-icons/fi';
+import { RiMoneyDollarBoxLine  } from 'react-icons/ri';
+
+interface StyledTitleProps {
+  userName?: string
+}
 
 const Container = styled.div`
   max-width: 720px;
@@ -28,6 +32,7 @@ const ContainerImage = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 5px;
+  text-align: left;
 `;
 
 const LogoImage = styled.div`
@@ -43,6 +48,11 @@ const LogoImage = styled.div`
 const LeftContent = styled.div`
   flex: 1;
   text-align: left;
+  min-height: 100px;
+  display: flex;
+  justify-content: flex-start; 
+  flex-direction: column-reverse;
+  padding-bottom: 10px;
 
   @media (max-width: 768px) {
     max-width: none;
@@ -70,7 +80,6 @@ const RightContent = styled.div`
 const StyledText = styled.div`
   display: flex;
   max-width: 700px;
-  justify-content: center;
   align-items: center;
   text-align: initial;
   padding: 0px;
@@ -79,6 +88,7 @@ const StyledText = styled.div`
     font-size: 45px;
     font-style: italic;
     font-weight: bold;
+    text-align: left;
     color: #fff;
     width: 70%
     padding: 0px
@@ -127,7 +137,9 @@ const VerticalLine = styled.div`
   margin-top: 15px;
 `;
 
-const StyledTitle: React.FC = () => {
+const StyledTitle: React.FC<StyledTitleProps> = ({
+  userName
+}) => {
   return (
     <Container>
       <ContainerImage>
@@ -143,7 +155,11 @@ const StyledTitle: React.FC = () => {
       <Content>
         <LeftContent>
           <StyledText>
-            <span>Use uma grana que já é sua e saia do aperto.</span>
+            {userName ? (
+              <span>{`Olá, ${userName}!`}</span>
+            ) : (
+              <span>Use uma grana que já é sua e saia do aperto.</span>
+            )}
           </StyledText>
         </LeftContent>
         <RightContent>
@@ -152,7 +168,8 @@ const StyledTitle: React.FC = () => {
             <StyledRightTextInfo><b>Insira seus dados</b> e verifique o quanto você poderá receber!</StyledRightTextInfo>
           </BoxRightInfo>
           <BoxRightInfo>
-            <StyledRightTextInfo><b>💲SAQUE ANIVERSÁRIO</b></StyledRightTextInfo>
+            <RiMoneyDollarBoxLine size={30} style={{ marginTop: '5px', color: '#13547E' }} />
+            <StyledRightTextInfo><b>SAQUE ANIVERSÁRIO</b></StyledRightTextInfo>
           </BoxRightInfo>
         </RightContent>
       </Content>

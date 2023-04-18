@@ -7,12 +7,13 @@ import StyledTitle from '../components/StyledTitle';
 
 const Card = styled.div`
   background-color: #fff;
-  padding: 40px 80px;
+  padding: 80px 60px;
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   margin-top: 30px;
+  display: flex;
 
   @media (max-width: 768px) {
     margin-top: 10px;
@@ -37,7 +38,7 @@ const LeftSide = styled.div`
   flex-direction: column;
   color: #00A7CF;
   width: 50%;
-  align-items: center;
+  align-items: baseline;
   padding: 0px 30px;
 `;
 
@@ -51,20 +52,35 @@ const RightSide = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 24px;
-  font-weight: 300;
-  margin-bottom: 0px;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0px;
+  width: 100%;
 `;
 
 const ResultText = styled.p`
   font-size: 48px;
   font-weight: bold;
   margin: 0px;
+  width: 100%;
+
+  & span {
+    color: darkslategray;
+    font-size: 19px;
+  }
+
+  & .cents {
+    color: #00A7CF;
+  }
 `;
 
 const DisclaimerText = styled.p`
   font-size: 13px;
   text-align: initial;
+
+  & b {
+    color: #00A7CF;
+  }
 `;
 
 const Container = styled.div`
@@ -123,9 +139,13 @@ const Result: React.FC = () => {
 
   const navigate = useNavigate()
 
-  const { name, balance, birthday } = useContext(MyContext);
+  const { name, balance } = useContext(MyContext);
+
+  const names = name.split(' ');
 
   const saqueAniversario = calcularSaqueFGTS(balance)
+
+  console.log("aqui -->", saqueAniversario)
 
   useEffect(() => {
     if(name.length < 1 || balance.length < 1){
@@ -137,15 +157,15 @@ const Result: React.FC = () => {
     <Container>
       <BackgroundImage />
       <Content>
-        <StyledTitle/>
+        <StyledTitle userName={names[0]}/>
         <ResultContainer>
           <Card>
             <LeftSide>
               <Title>Você pode receber até</Title>
-              <ResultText>R$ {`${saqueAniversario}`}</ResultText>
+              <ResultText><span>R$ </span>{`${saqueAniversario[0]}`}<span className='cents'>,{`${saqueAniversario[1]}`}</span></ResultText>
             </LeftSide>
             <RightSide>
-              <DisclaimerText>Esta simulação traz valores aproximados. Para calcular o valor exato, entre em contato com o Smile .Co ou consulte seu saldo no app do FGTS.</DisclaimerText>
+              <DisclaimerText><b>Esta simulação traz valores aproximados.</b> Para calcular o valor exato,<b> entre em contato com o Smile .Co ou consulte seu saldo no app do FGTS.</b></DisclaimerText>
             </RightSide>
           </Card>
         </ResultContainer>
