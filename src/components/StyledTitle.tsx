@@ -33,6 +33,9 @@ const ContainerImage = styled.div`
   align-items: center;
   gap: 5px;
   text-align: left;
+  @media (max-width: 768px) {
+    padding: 0px 10px;
+  }
 `;
 
 const LogoImage = styled.div`
@@ -57,6 +60,7 @@ const LeftContent = styled.div`
   @media (max-width: 768px) {
     max-width: none;
     width: 100%;
+    min-height: 50px;
   }
 `;
 
@@ -90,8 +94,11 @@ const StyledText = styled.div`
     font-weight: bold;
     text-align: left;
     color: #fff;
-    width: 70%
-    padding: 0px
+    @media (max-width: 768px) {
+      font-size: 30px; 
+      text-align: center;
+      width: 100%;
+    }
   }
 
   & > div {

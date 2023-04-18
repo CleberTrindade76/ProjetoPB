@@ -20,6 +20,10 @@ const ButtonElement = styled.button`
   &:hover {
     background-color: #e58300;
   }
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 
 const Button: React.FC<ButtonProps> = ({ label, onClick }) => {

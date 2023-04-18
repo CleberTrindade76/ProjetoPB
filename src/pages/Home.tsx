@@ -3,64 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Input from '../components/Input';
 import Select from '../components/Select';
+import Container from '../components/Container';
+import Card from '../components/Card';
+import Content from '../components/Content';
+import Row from '../components/Row';
 import Button from '../components/Button';
 import BackgroundImage from '../components/BackgroundImage';
 import StyledTitle from '../components/StyledTitle';
 import { MyContext } from "../context/context";
 import { validateForm } from '../utils/utils';
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: relative;
-
-  @media (max-width: 768px) {
-    height: auto;
-  }
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-`;
-
-const Card = styled.div`
-  background-color: #fff;
-  padding: 40px 80px;
-  border-radius: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 600px;
-  margin-top: 30px;
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-    padding-right: 0px;
-    padding-left: 0px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    justify-content: center;
-    flex-direction: column;
-    display: flex;
-  }
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    place-content: space-between;
-    margin-top: 16px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-`;
 
 const Wrapper = styled.div`
   position: relative;

@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# DESAFIO PARANÁ BANCO
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Breve descrição do projeto.
 
-## Available Scripts
+## Instalação
 
-In the project directory, you can run:
+1. Clone o repositório: `git clone https://github.com/CleberTrindade76/ProjetoPB`
+2. Acesse o diretório: `cd adiantamento-fgts-pb`
+3. Instale as dependências: `npm install` ou `yarn install`
 
-### `npm start`
+## Scripts Disponíveis
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+No diretório do projeto, você pode executar:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `npm start` ou `yarn start`
 
-### `npm test`
+Executa o aplicativo no modo de desenvolvimento.\
+Abra [http://localhost:3000](http://localhost:3000) para visualizá-lo no navegador.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A página será recarregada automaticamente se você fizer alterações no código.\
+Você também verá quaisquer erros de lint no console.
 
-### `npm run build`
+### `npm test` ou `yarn test`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Executa os testes no modo interativo de observação.\
+Consulte a seção sobre [execução de testes](https://facebook.github.io/create-react-app/docs/running-tests) para obter mais informações.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run build` ou `yarn build`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Compila o aplicativo para produção na pasta `build`.\
+Ele agrupa corretamente o React no modo de produção e otimiza a construção para o melhor desempenho.
 
-### `npm run eject`
+A construção é minimizada e os nomes de arquivos incluem os hashes.\
+Seu aplicativo está pronto para ser implantado!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Consulte a seção sobre [implantação](https://facebook.github.io/create-react-app/docs/deployment) para obter mais informações.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Tecnologias Utilizadas
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- React JS
+- Typescript
+- Context API
+- Styled Components
+- Testing Library
+- Axios
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Como Contribuir
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Faça um fork do projeto
+2. Crie uma branch para a sua feature: `git checkout -b minha-feature`
+3. Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`
+4. Faça push para a sua branch: `git push origin minha-feature`
+5. Envie um pull request
