@@ -1,41 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
-  imageUrl: string;
-}
-
-const BackgroundImage: React.FC<Props> = ({ imageUrl }) => {
-  return (
-    <BackgroundImageWrapper imageUrl={imageUrl}>
-      <BlueDottedBackground />
-    </BackgroundImageWrapper>
-  );
-}
-
-const BackgroundImageWrapper = styled.div<{ imageUrl: string }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-image: url(${props => props.imageUrl});
-  background-position: center center;
-  background-repeat: no-repeat;
+// Define a imagem de fundo
+const BackgroundImage = styled.div`
+  background-image: url("./images/hero.jpg");
   background-size: cover;
-`;
-
-const BlueDottedBackground = styled.div`
-  width: 40%;
+  background-position: center;
   height: 100%;
-  background-image: radial-gradient(#FFFFFF 10%, rgba(255, 255, 255, 0) 11%), radial-gradient(#FFFFFF 10%, rgba(255, 255, 255, 0) 11%);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
+  width: 70%;
 `;
 
-export default BackgroundImage;
+// Define a div azul pontilhada
+const Divider = styled.div`
+  height: 100%;
+  width: 60%;
+`;
+
+const DottedBlueDiv = styled.div`
+  -webkit-clip-path: polygon(16% 0, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(16% 0, 100% 0, 100% 100%, 0% 100%);
+  background-color: #035efc;
+  height: 100%;
+  width: 58%;
+  position: absolute;
+  right: 0px;
+  background-image: radial-gradient(circle, #293447 1px, transparent 1px);
+  background-size: 10px 10px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  filter: brightness(40%);
+`;
+
+const Background: React.FC = () => {
+  return (
+    <Wrapper>
+      <BackgroundImage />
+      <Divider />
+      <DottedBlueDiv />
+    </Wrapper>
+  );
+};
+
+export default Background;
+

@@ -32,6 +32,7 @@ const InputElement = styled.input`
   border: solid 2px lightgray;
   outline: none;
   font-size: 16px;
+  font-family: 'Montserrat';
   &::placeholder {
     color: rgba(0, 0, 0, 0.5);
   }

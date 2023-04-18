@@ -32,6 +32,7 @@ const SelectElement = styled.select`
   border-radius: 4px;
   border: solid 2px lightgray;
   outline: none;
+  font-family: 'Montserrat';
   font-size: 16px;
   &::placeholder {
     color: rgba(0, 0, 0, 0.5);

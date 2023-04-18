@@ -102,7 +102,7 @@ const Home: React.FC = () => {
 
   return (
     <Wrapper>
-      <BackgroundImage imageUrl='../../public/images/hero.jpg' />
+      <BackgroundImage />
       <Container>
         <Content>
           <StyledTitle/>

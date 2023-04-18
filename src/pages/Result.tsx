@@ -21,6 +21,7 @@ const LeftSide = styled.div`
   width: 50%;
   align-items: baseline;
   padding: 0px 30px;
+  align-self: center;
   @media (max-width: 768px) {
     padding: 0px ;
     width: 100%;
@@ -38,6 +39,13 @@ const RightSide = styled.div`
     padding: 0px;
     width: 90%;
     margin: auto;
+  }
+`;
+
+const CardContent = styled.div`
+  display: flex;
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 
@@ -101,13 +109,15 @@ const Result: React.FC = () => {
         <StyledTitle userName={names[0]}/>
         <ResultContainer>
           <Card>
-            <LeftSide>
-              <Title>Você pode receber até</Title>
-              <ResultText><span>R$ </span>{`${saqueAniversario[0]}`}<span className='cents'>,{`${saqueAniversario[1]}`}</span></ResultText>
-            </LeftSide>
-            <RightSide>
-              <DisclaimerText><b>Esta simulação traz valores aproximados.</b><span> Para calcular o valor exato,</span><b> entre em contato com o Smile .Co ou consulte seu saldo no app do FGTS.</b></DisclaimerText>
-            </RightSide>
+            <CardContent>
+              <LeftSide>
+                <Title>Você pode receber até</Title>
+                <ResultText><span>R$ </span>{`${saqueAniversario[0]}`}<span className='cents'>,{`${saqueAniversario[1]}`}</span></ResultText>
+              </LeftSide>
+              <RightSide>
+                <DisclaimerText><b>Esta simulação traz valores aproximados.</b><span> Para calcular o valor exato,</span><b> entre em contato com o Smile .Co ou consulte seu saldo no app do FGTS.</b></DisclaimerText>
+              </RightSide>
+            </CardContent>
           </Card>
         </ResultContainer>
       </Content>
