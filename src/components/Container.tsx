@@ -4,7 +4,7 @@ interface ContainerProps {
   children: React.ReactNode;
 }
 
-const ContainerWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   position: relative;
@@ -15,7 +15,7 @@ const ContainerWrapper = styled.div`
 `;
 
 const Container: React.FC<ContainerProps> = ({ children }) => {
-  return <ContainerWrapper>{children}</ContainerWrapper>;
+  return <Wrapper>{children}</Wrapper>;
 };
 
 export default Container;

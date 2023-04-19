@@ -4,7 +4,7 @@ interface ContentProps {
   children: React.ReactNode;
 }
 
-const ContentWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@ const ContentWrapper = styled.div`
 `;
 
 const Content: React.FC<ContentProps> = ({ children }) => {
-  return <ContentWrapper>{children}</ContentWrapper>;
+  return <Wrapper>{children}</Wrapper>;
 };
 
 export default Content;

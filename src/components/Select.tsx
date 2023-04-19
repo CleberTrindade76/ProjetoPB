@@ -1,13 +1,19 @@
+import { FC, ChangeEvent, SelectHTMLAttributes } from 'react';
 import styled from "styled-components";
 import SnackBarError from './SnackBar';
 
-interface SelectProps {
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   placeholder?: string;
-  options: { value: string; label: string; }[];
+  options: Option[];
   value: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  error?: string
+  error?: string;
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const SelectContainer = styled.div`
@@ -41,19 +47,34 @@ const SelectElement = styled.select`
 
 const OptionElement = styled.option``;
 
-const Select: React.FC<SelectProps & React.SelectHTMLAttributes<HTMLSelectElement>> = ({ label, placeholder, options, value, error, onChange, ...props }) => {
+const Select: FC<SelectProps> = ({
+  label,
+  placeholder,
+  options,
+  value,
+  error,
+  onChange,
+  ...props
+}) => {
+  const hasError = error && error.length > 1;
+
   return (
     <SelectContainer>
       {label && <Label>{label}</Label>}
       <SelectElement value={value} onChange={onChange} {...props}>
-        {placeholder && <OptionElement value="" disabled selected hidden>{placeholder}</OptionElement>}
-        {options.map(option => (
-          <OptionElement key={option.value} value={option.value}>{option.label}</OptionElement>
+        {placeholder && (
+          <OptionElement value="" disabled selected hidden>
+            {placeholder}
+          </OptionElement>
+        )}
+        {options.map(({ value, label }) => (
+          <OptionElement key={value} value={value}>
+            {label}
+          </OptionElement>
         ))}
       </SelectElement>
-      {(error && error.length > 1) && <SnackBarError message={error}/>}
+      {hasError && <SnackBarError message={error} />}
     </SelectContainer>
   );
 };
-
 export default Select;
