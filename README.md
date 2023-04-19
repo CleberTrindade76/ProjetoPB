@@ -1,6 +1,10 @@
 # DESAFIO PARANÁ BANCO
 
-Breve descrição do projeto.
+O projeto em questão foi desenvolvido em React JS com Typescript e Context API e consiste em uma aplicação que calcula o valor disponível para saque de aniversário do FGTS para o usuário. 
+
+A utilização do React JS com Typescript permite a criação de um código mais robusto e com menos erros, além de facilitar a manutenção e a escalabilidade da aplicação. A utilização do Context API permite a centralização e compartilhamento dos dados necessários entre os componentes da aplicação, tornando o desenvolvimento mais eficiente e organizado.
+
+Este projeto foi desenvolvido como parte de uma avaliação técnica para a empresa Paraná Banco e demonstra um pouco da minha capacidade como desenvolvedor em utilizar as tecnologias e ferramentas adequadas para a criação de soluções eficientes e escaláveis.
 
 ## Instalação
 
